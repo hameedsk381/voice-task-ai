@@ -96,8 +96,9 @@ class FailureLogDB(Base):
 
 async def init_db():
     """Initialize database tables"""
-    import os
-    os.makedirs("./data", exist_ok=True)
+    # Create data directory only for SQLite
+    if "sqlite" in DATABASE_URL:
+        os.makedirs("./data", exist_ok=True)
     
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)

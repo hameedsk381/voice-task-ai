@@ -209,20 +209,21 @@ The platform currently supports these service categories:
 
 ## 🔧 Configuration
 
-### Environment Variables
+### Environment Setup (Unified)
 
-**Backend (.env)**:
-```env
-OPENAI_API_KEY=your_openai_api_key
-CONFIDENCE_THRESHOLD=0.75
-DATABASE_URL=sqlite+aiosqlite:///./data/receptionist.db
-ALLOWED_ORIGINS=http://localhost:3000
-```
+We use a single source of truth for environment variables at the root of the project.
 
-**Frontend (.env.local)**:
-```env
-NEXT_PUBLIC_API_URL=http://localhost:8000
-```
+1.  **Configure `.env`**: Copy the provided template or edit the existing `.env` at the root.
+2.  **Sync to subprojects**: Run the sync script to populate `backend/` and `frontend/` for local development:
+    ```bash
+    python sync_env.py
+    ```
+
+**Root `.env` Keys**:
+- `GROQ_API_KEY`: Groq Cloud API key
+- `TWILIO_ACCOUNT_SID`: Twilio account ID
+- `NEXT_PUBLIC_API_URL`: Backend URL for the browser (default: http://localhost:8000)
+- `JWT_SECRET_KEY`: Secret for signing tokens
 
 ---
 
